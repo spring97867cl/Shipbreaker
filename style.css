@@ -25,7 +25,9 @@ body {
 }
 
 
-#video-b { opacity: 0; } /* 重複設定：隱藏影片 B */
+#video-b {  opacity: 0; /* 重複設定：隱藏影片 B */
+            filter: contrast(1.4) brightness(0.8) grayscale(0.8) blur(1px);
+} 
 
 
 
