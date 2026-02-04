@@ -42,7 +42,7 @@
                 <!-- <p class="zoom-subtitle">透視台灣遠洋漁業的困境與未來</p> -->
             </div>
 
-            <h2 id="text-main" class="scroll-text">破題後小標題</h2> 
+            <h2 id="text-main" class="scroll-text"> </h2> 
             <h2 id="text-monitor" class="scroll-text">拆船監視器畫面</h2> </div>
     </div>
 
@@ -140,12 +140,35 @@
         .to("#text-main", { opacity: 0, y: "-60%", duration: 2, delay: 1.5 }) 
         
         // 4. 影片與監控畫面切換
-        .to("#video-a", { opacity: 0, duration: 2 }) 
-        .to("#video-b", { opacity: 1, duration: 2 }, "<") 
-        .to(".monitor-overlay", { opacity: 1, duration: 2 }, "<") 
-        .to("#text-monitor", { opacity: 1, y: "-50%", duration: 2 });
+        // .to("#video-a", { opacity: 0, duration: 2 }) 
+        // .to("#video-b", { opacity: 1, duration: 2 }, "<") 
+        // .to(".monitor-overlay", { opacity: 1, duration: 2 }, "<") 
+        // .to("#text-monitor", { opacity: 1, y: "-50%", duration: 2 });
 
-        
+                    // --- 階段 3: 影片 A 淡出 (變黑) ---
+            // 因為背景色 body 是黑色的，所以只要把最上層的 Video A 透明度變 0，就會看到黑色
+            .to("#video-a", { 
+                opacity: 0, 
+                duration: 3,
+                ease: "none"
+            })
+            
+            // --- 階段 4: 全黑停頓 ---
+            // 這裡可以設定要黑多久，製造懸疑感
+            .to({}, { duration: 1 }) 
+
+            // --- 階段 5: 影片 B (監視器) 淡入 ---
+            .to("#video-b", { 
+                opacity: 1, 
+                duration: 3,
+                ease: "power1.inOut"
+            })
+            // 同步顯示監視器掃描線 (與影片 B 一起出現)
+            .to(".monitor-overlay", { 
+                opacity: 1, 
+                duration: 3 
+            }, "<"); // "<" 代表跟上一個動畫同時開始
+
         // 背景圖視差移動效果
         const bgImg = document.querySelector("#global-bg");
         if(bgImg) {
