@@ -1,0 +1,282 @@
+body {
+    font-size: 25px; /* 全域字體大小 */
+    margin: 0; /* 移除邊距 */
+    background-color: transparent; /* 背景透明，顯示底層背景圖 */
+    color: white; /* 全域文字顏色 */
+}
+
+.scrolling-bg-container {
+    position: fixed; /* 固定在視窗上 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -2; /* 置於最底層 */
+    overflow: hidden;
+    background-color: #000000;
+}
+
+#global-bg {
+    width: 100%;
+    height: 150vh; /* 高度超過視窗以供捲動 */
+    object-fit: cover;
+    filter: saturate(0.4) brightness(0.4); /* 降低飽和度與亮度，強調壓抑感 */
+    will-change: transform; /* 優化效能 */
+}
+
+
+#video-b { opacity: 0; } /* 重複設定：隱藏影片 B */
+
+
+
+.monitor-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none; /* 防止遮罩干擾滑鼠點擊 */
+    opacity: 0;
+    /* 製作掃描線效果的漸層背景 */
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.2) 0px,
+        rgba(0, 0, 0, 0.2) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+}
+
+.image-grid-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 新增：讓容器內的所有子元素（圖片）水平置中 */
+    gap: 150px; /* 圖片間距 */
+    padding: 100px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: transparent;
+}
+
+.image-grid-container img {
+    width: 50%; /* 圖片寬度佔一半 */
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* 陰影 */
+    opacity: 0; /* 由 JS 控制顯示 */
+}
+
+/* .image-grid-container img:nth-child(odd) { align-self: flex-start; } 奇數圖靠左 */
+/* .image-grid-container img:nth-child(even) { align-self: flex-end; } 偶數圖靠右 */
+
+.flourish-container {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: transparent;
+}
+
+.zoom-section {
+    height: 400vh; /* 捲動動畫所需的空間 */
+    position: relative;
+    background-color: #000;
+}
+
+.zoom-sticky {
+    position: sticky; /* 釘選效果 */
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.zoom-target-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.zoom-png-frame {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+    will-change: transform;
+}
+
+.zoom-content {
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    z-index: 3;
+    margin: 0;
+    padding: 0;
+    color: white;
+    text-shadow: 0 0 20px rgba(0,0,0,0.8);
+    pointer-events: none;
+}
+
+
+
+/* 優化文字辨識度：增加陰影與半透明背景襯托 */
+.scroll-text, .zoom-title {
+    position: absolute; /* 確保在釘選容器內絕對定位 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    text-align: center;
+    z-index: 10;
+    
+    /* 增加文字陰影，解決背景雜亂導致文字看不清的問題 */
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.9), 0 0 5px rgba(0, 0, 0, 1);
+    letter-spacing: 2px;
+}
+
+/* 針對小標題給予微弱的背景色區隔 */
+#text-main, #text-monitor {
+    background: rgba(0, 0, 0, 0.2); 
+    padding: 10px 20px !important; 
+    border-radius: 4px;
+    backdrop-filter: blur(2px); /* 輕微模糊背景增加質感 */
+}
+
+/* 優化圖片網格的進場感覺 */
+.image-grid-container img {
+    width: 50%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    opacity: 0; 
+    transition: filter 0.5s ease; /* 增加滑鼠經過時的濾鏡變化 (可選) */
+}
+
+.image-grid-container img:hover {
+    filter: brightness(1.2);
+}
+
+
+
+
+
+
+.zoom-subtitle { font-size: 1.5rem; opacity: 0.8; }
+
+
+
+
+
+
+
+.text-reveal-section {
+    /* background-color: red; */
+    height: 200vh; /* 捲動動畫的長度，越高代表要滾越久動畫才會跑完 */
+    position: relative;
+    /* background-color: #000; */
+}
+
+.text-reveal-sticky {
+    /* background-color: blue; */
+    position: relative; 
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reveal-p {
+    /* background-color: red; */
+    font-size: 2rem;
+    width: 70%;
+    text-align: center;
+    opacity: 0;
+    filter: blur(20px); /* 初始模糊 */
+    line-height: 1.6;
+}
+
+
+
+
+
+
+
+
+
+
+/* 修正：手電筒文字區塊 */
+.flashlight-section {
+    height: 250vh; /* 縮短捲動距離讓節奏更緊湊 */
+    width: 100%;  /* 強制滿版寬度 */
+    /* background-color: #000; */
+    margin-left: calc(-50vw + 50%); /* 修正：若在容器內，這能強制滿版 */
+}
+
+.flashlight-sticky {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+
+
+
+/* 修正：讓手電筒文字在畫面絕對置中 */
+.flashlight-text {
+    position: absolute;
+    top: 50%;           /* 垂直置中起始點 */
+    left: 50%;          /* 水平置中起始點 */
+    transform: translate(-50%, -50%); /* 修正：將文字中心點移至座標中心點 */
+    width: 90%;
+    max-width: 1000px;
+    font-size: 2.2rem;
+    text-align: center;
+    line-height: 1.6;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin: 0;
+}
+
+
+
+.bg-text {
+    /* 修正：提高底字亮度（淡灰色），讓讀者在還沒照亮前能看到文字位置 */
+    color: rgba(255, 255, 255, 0.15); 
+    z-index: 1;
+    opacity: 0;
+}
+
+.fg-text {
+    color: #fff;
+    z-index: 2;
+    opacity: 0; /* 新增：初始不透明度為 0 */
+    /* 修正：使用 CSS 變數並提供預設值 */
+    --mask-size: 0%;
+    --mask-blur: 0%;
+    
+    /* 改進的放射狀漸層：black 代表顯示，transparent 代表隱藏 */
+    -webkit-mask-image: radial-gradient(
+        circle at center, 
+        black var(--mask-size), 
+        transparent var(--mask-blur)
+    );
+    mask-image: radial-gradient(
+        circle at center, 
+        black var(--mask-size), 
+        transparent var(--mask-blur)
+    );
+}
