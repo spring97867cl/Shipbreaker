@@ -282,3 +282,134 @@ body {
         transparent var(--mask-blur)
     );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- 時間軸樣式區域 --- */
+
+.history-timeline {
+    width: 100%;
+    max-width: 1200px;
+    margin: 100px auto;
+    padding: 50px 20px;
+    position: relative;
+    color: #fff;
+}
+
+.timeline-main-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 80px;
+    letter-spacing: 5px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.timeline-container {
+    position: relative;
+    width: 100%;
+    min-height: 1000px;
+}
+
+/* 中央基準線 (底色) */
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* 中央進度線 (動畫色) */
+.timeline-line-progress {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, #fff, transparent);
+    z-index: 1;
+}
+
+.timeline-item {
+    width: 47%;
+    margin-bottom: 100px;
+    position: relative;
+    z-index: 2;
+    /* background-color: rgb(0, 66, 17); */
+}
+
+
+
+
+.timeline-item.left {
+    float: left;
+    text-align: left;
+    padding-right: 40px;
+}
+
+.timeline-item.right {
+    float: right;
+    text-align: left;
+    padding-left: 40px;
+}
+
+/* 清除浮動 */
+.timeline-container::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* 圓點 */
+.timeline-dot {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #ffca28;
+    border-radius: 50%;
+    top: 10px;
+    box-shadow: 0 0 15px #fff;
+}
+
+.left .timeline-dot { right: -9px; }
+.right .timeline-dot { left: -9px; }
+
+/* 日期與內容 */
+.timeline-date {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ffca28; /* 金黃色標記時間點 */
+    margin-bottom: 10px;
+}
+
+.timeline-content {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 響應式優化 */
+@media (max-width: 768px) {
+    .timeline-item { width: 90%; float: none !important; text-align: left !important; padding-left: 30px !important; margin-left: 10%; }
+    .timeline-container::before, .timeline-line-progress { left: 20px; transform: none; }
+    .timeline-dot { left: 12px !important; }
+}
