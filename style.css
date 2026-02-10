@@ -58,7 +58,8 @@ body {
     padding: 100px 5%;
     max-width: 1400px;
     margin: 0 auto;
-    background: transparent;
+    /* background: transparent; */
+    /* background-color: #ff7979; */
 }
 
 .image-grid-container img {
@@ -220,9 +221,10 @@ body {
 /* 修正：手電筒文字區塊 */
 .flashlight-section {
     height: 250vh; /* 縮短捲動距離讓節奏更緊湊 */
-    width: 100%;  /* 強制滿版寬度 */
+    width: 100vw;  /* 強制滿版寬度 */
     /* background-color: #000; */
-    margin-left: calc(-50vw + 50%); /* 修正：若在容器內，這能強制滿版 */
+    /* margin-left: calc(-50vw + 50%);  修正：若在容器內，這能強制滿版 */
+    margin: 0; /* 移除原本的 margin-left 修正 */
 }
 
 .flashlight-sticky {
@@ -346,26 +348,33 @@ body {
 }
 
 .timeline-item {
-    width: 47%;
-    margin-bottom: 100px;
+    width: 50%; /* 從 47% 改為 50% 確保切齊中線 */
+    margin-bottom: 80px;
     position: relative;
     z-index: 2;
+    box-sizing: border-box; /* 確保 padding 不會撐開寬度 */
     /* background-color: rgb(0, 66, 17); */
-}
 
+    /* 核心修正：強制換行，防止左右項目排在同一橫排 */
+    clear: both;
+}
+ 
 
 
 
 .timeline-item.left {
     float: left;
-    text-align: left;
-    padding-right: 40px;
+    text-align: right; /* 改為靠右對齊中心線，或者保持左對齊但調整 padding */
+    padding-right: 50px;
+    /* background-color: #005f26; */
 }
+
 
 .timeline-item.right {
     float: right;
     text-align: left;
-    padding-left: 40px;
+    padding-left: 50px;
+    /* background-color: #08419c; */
 }
 
 /* 清除浮動 */
@@ -386,8 +395,13 @@ body {
     box-shadow: 0 0 15px #fff;
 }
 
-.left .timeline-dot { right: -9px; }
-.right .timeline-dot { left: -9px; }
+/* 修正圓點位置 */
+.left .timeline-dot { 
+    right: -8px; /* 16px 寬的點，一半是 8px，剛好中心對準 2px 的線 */
+}
+.right .timeline-dot { 
+    left: -8px; 
+}
 
 /* 日期與內容 */
 .timeline-date {
@@ -406,6 +420,20 @@ body {
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+
+/* 時間軸圖片樣式 */
+.timeline-img {
+    width: 100%;
+    height: auto;
+    margin-top: 15px;
+    border-radius: 6px;
+    display: block;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+
+
 
 /* 響應式優化 */
 @media (max-width: 768px) {
