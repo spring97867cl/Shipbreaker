@@ -419,6 +419,9 @@ body {
     border-radius: 8px;
     backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* 新增這行：強制方框內的文字一律靠左對齊 */
+    text-align: left;
 }
 
 
@@ -514,6 +517,63 @@ body {
 
 
 
+
+
+
+
+
+
+
+/* style.css 新增內容 */
+.music-control {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 999; /* 確保在所有層級之上，包含 mini-video-wrapper (z-index: 15) */
+    backdrop-filter: blur(5px);
+    transition: all 0.5s ease;
+}
+
+.music-control:hover {
+    background: rgba(255, 202, 40, 0.3); /* 懸停時帶點黃色光暈，符合時間軸主題色 */
+    border-color: #ffca28;
+}
+
+.music-icon {
+    font-size: 24px;
+    user-select: none;
+}
+
+
+
+
+    /* style.css 新增內容 */
+
+    /* 定義呼吸動畫 */
+    @keyframes musicBreathe {
+        0% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 202, 40, 0.2); }
+        50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(255, 202, 40, 0.6); }
+        100% { transform: scale(1); box-shadow: 0 0 5px rgba(255, 202, 40, 0.2); }
+    }
+
+    /* 當音樂播放時，套用到圖示與容器 */
+    .music-control.is-playing {
+        border-color: #ffca28; /* 變成時間軸的黃色 */
+        animation: musicBreathe 2s infinite ease-in-out;
+    }
+
+    .music-control.is-playing .music-icon {
+        text-shadow: 0 0 10px #ffca28;
+    }
 
 
 
