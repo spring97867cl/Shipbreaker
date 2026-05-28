@@ -51,39 +51,35 @@
             </video>
             <div class="monitor-overlay"></div> 
 
-            
 
             
             <div class="mini-videos-container">
-    <div class="mini-video-wrapper v1">
-        <video muted loop playsinline><source src="./videos/flim1/mini1_受災戶_屋損.mp4" type="video/mp4"></video>
-        <span>REC 01</span>
-        <p class="mini-caption">小港居民房屋受損</p>
-    </div>
-    <div class="mini-video-wrapper v2">
-        <video muted loop playsinline><source src="./videos/flim1/mini2_老廢漁船滿港停.mp4" type="video/mp4"></video>
-        <span>REC 02</span>
-        <p class="mini-caption">老廢漁船滿港停</p>
-    </div>
-    <div class="mini-video-wrapper v3">
-        <video muted loop playsinline><source src="./videos/flim1/mini3_廢油汙染海水.mp4" type="video/mp4"></video>
-        <span>REC 03</span>
-        <p class="mini-caption">廢油汙染海水</p>
-    </div>
-    <div class="mini-video-wrapper v4">
-        <video muted loop playsinline><source src="./videos/flim1/mini4_拆船.mp4" type="video/mp4"></video>
-        <span>REC 04</span>
-        <p class="mini-caption">老舊廢船拆除</p>
-    </div>
-    <div class="mini-video-wrapper v5">
-        <video muted loop playsinline><source src="./videos/flim1/mini5_居民調解會.mp4" type="video/mp4"></video>
-        <span>REC 05</span>
-        <p class="mini-caption">旗津拆船協調會</p>
-    </div>
-</div>
-
-
-
+                <div class="mini-video-wrapper v1">
+                    <video muted loop playsinline><source src="./videos/flim1/mini1_受災戶_屋損.mp4" type="video/mp4"></video>
+                    <span>REC 01</span>
+                    <p class="mini-caption">小港居民房屋受損</p>
+                </div>
+                <div class="mini-video-wrapper v2">
+                    <video muted loop playsinline><source src="./videos/flim1/mini2_老廢漁船滿港停.mp4" type="video/mp4"></video>
+                    <span>REC 02</span>
+                    <p class="mini-caption">老廢漁船滿港停</p>
+                </div>
+                <div class="mini-video-wrapper v3">
+                    <video muted loop playsinline><source src="./videos/flim1/mini3_廢油汙染海水.mp4" type="video/mp4"></video>
+                    <span>REC 03</span>
+                    <p class="mini-caption">廢油汙染海水</p>
+                </div>
+                <div class="mini-video-wrapper v4">
+                    <video muted loop playsinline><source src="./videos/flim1/mini4_拆船.mp4" type="video/mp4"></video>
+                    <span>REC 04</span>
+                    <p class="mini-caption">老舊廢船拆除</p>
+                </div>
+                <div class="mini-video-wrapper v5">
+                    <video muted loop playsinline><source src="./videos/flim1/mini5_居民調解會.mp4" type="video/mp4"></video>
+                    <span>REC 05</span>
+                    <p class="mini-caption">旗津拆船協調會</p>
+                </div>
+            </div>
 
 
 
@@ -91,9 +87,12 @@
             <img src="./images/Gemini_Generated_Image_1q1vcq1q1vcq1q1v.png_.png" class="zoom-png-frame" alt="Frame"> 
             <div class="zoom-content" id="intro-titles"> 
                 <h1 class="zoom-title">被遺忘的海上遺產</h1>
-            </div>
-            <h2 id="text-main" class="scroll-text"> </h2> 
+             </div>
+           
+            <h3 id="text-main" class="scroll-text">當遠洋漁業走過黃金年代，曾經奔向世界的船隊，如今有一部分靜靜停在高雄港灣。<br> 它們不再出海，卻仍在等待一個答案</h3><h3>誰來負責拆解、管理與善後？</h3>
             <h2 id="text-monitor" class="scroll-text">拆船監視器畫面</h2> 
+
+
         </div>
     </div>
 
@@ -214,18 +213,9 @@
         <section class="text-reveal-section">
             <div class="text-reveal-sticky">
                 <p class="reveal-p">鏽跡之外的微光<br>我們不要全球最大的拆船遺址<br>我們要能看見藍天的海岸線</p>
-                
             </div>
-            
         </section>
     </section>
-
-    <!-- <section class="flashlight-section">
-        <div class="flashlight-sticky">
-            <p class="flashlight-text bg-text">被遺忘的海域，每艘廢船都鎖著一段不為人知的過去。</p>
-            <p class="flashlight-text fg-text">被遺忘的海域，每艘廢船都鎖著一段不為人知的過去。</p>
-        </div>
-    </section>   -->
 
 
 
@@ -252,6 +242,12 @@
     </div>
 
     <script>
+
+
+
+
+
+
         gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
         // 1. 主時間軸
@@ -267,14 +263,25 @@
         });
 
         masterTl
+            // [階段一] 圖片相框放大，產生穿透感
             .to(".zoom-png-frame", { scale: 80, ease: "power2.in", duration: 4 }) 
+            // 「被遺忘的海上遺產」放大並淡出 (提早 3.5 秒跟著相框一起動作)
             .to("#intro-titles", { opacity: 0, scale: 2, duration: 2 }, "-=3.5") 
+
+            // [階段二] 替換成你要的文字！「拆船監視器畫面」淡入出現
             .to("#text-main", { opacity: 1, y: "-50%", duration: 2 })
+            // 讓文字停留 1.5 秒後，再淡出往上飄 (如果不想要淡出，可以把這行刪掉)
             .to("#text-main", { opacity: 0, y: "-60%", duration: 2, delay: 1.5 }) 
+
+            // [階段三] 準備切換監視器影片
             .to("#video-a", { opacity: 0, duration: 3, ease: "none" })
+            // 空白停頓 1 秒製造懸疑感
             .to({}, { duration: 1 }) 
+
+            // [階段四] 出現影片B與掃描線遮罩
             .to("#video-b", { opacity: 1, duration: 3, ease: "power1.inOut" })
             .to(".monitor-overlay", { opacity: 1, duration: 3 }, "<");
+            // 注意：只有最後一行才有分號 (;) 結尾！這很重要，否則動畫會斷掉當機
 
 
 
