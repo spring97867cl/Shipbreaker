@@ -8,6 +8,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
     <link rel="stylesheet" href="style.css"> 
     <style>
+
+            :root {
+      --bg: #07151d;
+      --bg2: #0d2430;
+      --panel: rgba(11, 24, 34, 0.78);
+      --panel-2: rgba(255, 255, 255, 0.05);
+      --text: #e9f2f6;
+      --muted: #a8bdc9;
+      --line: rgba(255,255,255,0.12);
+      --accent: #7dd3fc;
+      --accent2: #f59e0b;
+      --danger: #fb7185;
+      --ok: #34d399;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max: 1180px;
+    }
+
+        a { color: inherit; text-decoration: none; }
+
         .spacer { height: 100vh; display: flex; align-items: center; justify-content: center; } 
         .scrolly-section { position: relative; height: 300vh; } 
         .sticky-map { position: sticky; top: 0; width: 100%; height: 100vh; background: rgba(104, 200, 255, 0.3); overflow: hidden; display: flex; align-items: center; justify-content: center; } 
@@ -23,6 +45,114 @@
             height: 100%;
             object-fit: cover; 
         }
+
+
+
+
+        .timeline {
+        position: relative;
+        display: grid;
+        gap: 16px;
+        }
+        .timeline::before {
+        content: "";
+        position: absolute;
+        left: 18px;
+        top: 10px;
+        bottom: 10px;
+        width: 2px;
+        background: linear-gradient(180deg, rgba(125,211,252,.65), rgba(245,158,11,.25));
+        }
+        .time-item {
+        position: relative;
+        padding-left: 54px;
+        }
+        .time-item::before {
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 8px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent), var(--accent2));
+        box-shadow: 0 0 0 6px rgba(125,211,252,.12);
+        }
+        .time-year {
+        font-size: 14px;
+        color: var(--accent);
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        margin-bottom: 4px;
+        }
+        .time-title {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 6px;
+        }
+        .time-body { color: var(--muted); }
+
+
+
+
+
+
+
+
+
+        .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        backdrop-filter: blur(14px);
+        background: rgba(4, 12, 18, 0.72);
+        border-bottom: 1px solid var(--line);
+        }
+        .topbar-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 5px 20px 0;
+        }
+        .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: .04em;
+        }
+        .brand-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, rgba(125,211,252,.24), rgba(245,158,11,.18));
+        border: 1px solid rgba(255,255,255,.14);
+        box-shadow: var(--shadow);
+        }
+
+        .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: flex-end;
+        font-size: 14px;
+        color: var(--muted);
+        }
+        .nav a {
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(255,255,255,.03);
+        border: 1px solid rgba(255,255,255,.08);
+        }
+        .nav a:hover { color: var(--text); border-color: rgba(125,211,252,.28); }
+
+
+
     </style>
 </head>
 <body>
@@ -38,9 +168,30 @@
 
 
 
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">⛵</div>
+        <div>
+          <div style="font-size: 18px;">高雄港老舊遠洋漁船拆專題</div>
+          <div class="muted" style="font-size:12px;">Kaohsiung Shipbreaker Feature Draft</div>
+        </div>
+      </div>
+      <nav class="nav" aria-label="頁面導覽">
+        <a href="#top-of-page">首頁</a>
+        <a href="#problem">現況</a>
+        <a href="#history-timeline">歷史</a>
+        <a href="#why">為何難拆</a>
+        <a href="#impact">衝擊</a>
+        <a href="#voices">人物</a>
+        <a href="#solution">解方</a>
+      </nav>
+    </div>
+  </div>
 
 
 
+<section id="top-of-page">
     <div class="zoom-section"> 
         <div class="zoom-sticky"> 
             <video id="video-a" autoplay loop muted playsinline>
@@ -100,13 +251,63 @@
         <img src="./images/sailboat-medeteranian-sea.jpg" id="global-bg" alt="background"> 
     </div>
 
+</section>
+
+
+<!-- 笨方法區隔用 -->
+<section>
+    <div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+</section>
+
+      <section id="problem">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker"><br><br><br><br>現況問題</div>
+        <h2>港灣裡的沉默船隊</h2>
+        <p class="section-desc">現在發生了什麼事？<Br>這些船為何會留在港裡？<Br>又為什麼這件事不只是景觀問題，而是環境、管理與產業轉型的交叉議題？</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card pad">
+          <h3>船還在，故事卻被時間拖慢了</h3>
+          <p style="font-size: 16px;">高雄港部分水域停泊著多艘老舊遠洋漁船。有些仍在等待出售，有些已進入拆解程序，也有一些長期閒置，幾乎沒有人再使用。</p>
+          <p style="font-size: 16px;">船體長年泡在海水中，鏽蝕不斷擴散；油料殘留、塗料剝落與廢棄零件，也讓港灣環境承受更高壓力。</p>
+          <!-- <p class="muted"><strong>可替換素材：</strong>高雄港老舊船舶空拍、船身鏽蝕特寫、港邊作業鏡頭、海面油污或漂浮物畫面。</p> -->
+          <div class="stats">
+            <div class="stat"><div class="num">47</div><div class="txt">艘漁船預計於116年底，在興達海基設立臨時拆船廠完成拆除作業</div></div>
+            <div class="stat"><div class="num">3</div><div class="txt">家修造船廠可合法拆船(全台僅剩)</div></div>
+            <div class="stat"><div class="num">XX</div><div class="txt">可能受影響港區範圍（待核對）</div></div>
+            <!-- <div class="stat"><div class="num">XX</div><div class="txt">相關單位／管理權責（待核對）</div></div> -->
+          </div>
+        </div>
+
+        <div class="media-placeholder">
+          <div>
+            <strong>興達港近況</strong>
+            <!-- <span>請替換為「高雄港老舊遠洋漁船空拍影片」或「港邊鏽蝕船身特寫照片」。</span> -->
+             <video style="width: 100%; height: auto; border-radius: 8px;" autoplay muted loop playsinline><source src="./videos/Video-3(拆船、廢船停靠).mp4" type="video/mp4"></video>
+            <!-- <img src="./images/Gemini/jpg/01.圖片一_戰後初期_1945年後_Gemini_Generated_Image_6yy4sv6yy4sv6yy4.jpg" class="timeline-img" alt="1945示意圖"> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
 
+<!-- 笨方法區隔用 -->
+<section>
+    <div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+</section>
 
 
-        <section class="history-timeline">
-            <h2 class="timeline-main-title">高雄拆船業大事記</h2>
+
+        <section id="history-timeline">
+            <h2 class="timeline-main-title"><br>高雄拆船業大事記</h2>
             <div class="timeline-container">
                 <div class="timeline-line-progress"></div> 
                     <div class="timeline-item left">
@@ -185,37 +386,233 @@
 
 
 
-
-
-
-
-    <section class="image-grid-container"> 
+        
+        <!-- 原先的資料，暫留 -->
+    <!-- <section class="image-grid-container"> 
         <img src="./images/600x600/abstract-aerial-view-background-of-blue-waves-2026-01-09-10-14-51-utc.jpg" alt="1">
         <section class="text-reveal-section">
             <div class="text-reveal-sticky">
                 <p class="reveal-p">港底的沈默毒藥<br>清不完的重金屬<br>高雄港拆船業遺留下的『生態帳單』<br>由誰買單？</p>
             </div>
-        </section>
+        </section> -->
 
+        <!-- <img src="./images/600x600/beautiful-shot-of-a-shrimp-boat-at-sunset-2026-01-07-23-14-54-utc.jpeg" alt="2">
+        <img src="./images/600x600/beautiful-shot-of-a-shrimp-boat-at-sunset-2026-01-07-23-14-54-utc.jpeg" alt="2"> -->
+
+
+        <!-- //三張圖平行 -->
+        <!-- <div class="image-container">
         <img src="./images/600x600/beautiful-shot-of-a-shrimp-boat-at-sunset-2026-01-07-23-14-54-utc.jpeg" alt="2">
-
+        <img src="./images/600x600/beautiful-shot-of-a-shrimp-boat-at-sunset-2026-01-07-23-14-54-utc.jpeg" alt="2">
+        <img src="./images/600x600/beautiful-shot-of-a-shrimp-boat-at-sunset-2026-01-07-23-14-54-utc.jpeg" alt="2">
+        </div>
         <section class="flashlight-section">
+        </section> -->
+
+
+
+
+<!-- 笨方法區隔用 -->
+<section>
+    <div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+</section>
+
+
+
+
+    <section > 
+        <section class="text-reveal-section">
+            <div class="text-reveal-sticky" >
+                <p class="reveal-p">為什麼老船一直留在港裡？</p>
+            </div>
+        </section>
+        <img src="./images/still/HeroVideo.00_03_44_28.Still005.png" alt="1">
+
+
+
+
+
+  <section id="why">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker"><br><br><br><br>核心原因</div>
+        <h2>為什麼老船一直留在港裡？</h2>
+        <p class="section-desc">不是大家不知道問題，而是拆解與汰除之所以困難，背後有成本、責任與制度三層阻力。</p>
+      </div>
+
+      <div class="three-col">
+        <div class="mini-card">
+          <div class="icon">1</div>
+          <h3>拆解成本高</h3>
+          <p>老舊船舶拆解涉及人力、吊裝、污染物處理與廢棄物清運，成本往往不是單一船主可以輕易負擔。</p>
+        </div>
+        <div class="mini-card">
+          <div class="icon">2</div>
+          <h3>權責不易釐清</h3>
+          <p>船籍、所有權、停泊管理與環境責任分散在不同單位之間，導致問題常常「看得到，卻很難立刻處理」。</p>
+        </div>
+        <div class="mini-card">
+          <div class="icon">3</div>
+          <h3>缺乏長期制度</h3>
+          <p>若沒有穩定的補助、回收機制或汰除方案，老船就容易在港內持續累積，形成越拖越大的治理負擔。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+    <section id="impact">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker"><br><br><br><br>環境衝擊</div>
+        <h2>港底的沉默毒藥</h2>
+        <p class="section-desc">這一段建議從感性標題走向可驗證的內容：哪些污染風險可能存在？它們會如何影響港灣與周邊社區？</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card pad">
+          <h3>可能的風險來源</h3>
+          <p>長期閒置或年久失修的船體，可能涉及廢油、塗料剝落、金屬鏽蝕、機械殘留物與其他廢棄材料的管理問題。</p>
+          <p>若拆解過程缺乏完整污染控制，風險不只留在船上，也會進一步擴散到港灣水域與岸線環境。</p>
+          <p class="muted">這一段建議正式上線前，補上可查證的研究、監測數據與單位訪談，以避免敘述過度抽象。</p>
+        </div>
+        <div class="media-placeholder">
+          <div>
+            <strong>暫時性資料圖／顯微細節區塊</strong>
+            <span>請替換為：污染來源示意圖、港底沉積物照片、拆船流程圖、專家訪談影片。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+        <!-- <section class="flashlight-section">
             <div class="flashlight-sticky">
                 <p class="flashlight-text bg-text">被遺忘的海域，每艘廢船都鎖著一段不為人知的過去。</p>
                 <p class="flashlight-text fg-text">被遺忘的海域，每艘廢船都鎖著一段不為人知的過去。</p>
             </div>
-        </section>
+        </section> -->
 
         
 
-        <img src="./images/600x600/dutch-shrimp-fishing-cutter-vessel-2026-01-09-01-13-51-utc.jpg" alt="3">
+        <!-- <img src="./images/600x600/dutch-shrimp-fishing-cutter-vessel-2026-01-09-01-13-51-utc.jpg" alt="3">
 
         <section class="text-reveal-section">
             <div class="text-reveal-sticky">
                 <p class="reveal-p">鏽跡之外的微光<br>我們不要全球最大的拆船遺址<br>我們要能看見藍天的海岸線</p>
             </div>
-        </section>
+        </section> -->
+
+<!-- 笨方法區隔用 -->
+<section>
+    <div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+</section>
+
+
+
+
+        <section id="solution">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker"><br><br><br><br>解方與未來</div>
+        <h2>老船的最後航程</h2>
+        <p class="section-desc">不要讓報導只停留在問題。讓觀眾看見，政策、制度與產業都有機會做出改變。</p>
+      </div>
+
+      <div class="solutions">
+        <div class="solution-list">
+          <div class="solution-item">
+            <div class="bubble">A</div>
+            <div>
+              <h3>建立更明確的老船汰除機制</h3>
+              <p>包含補助、通報、回收與拆解流程，降低船主單獨承擔的門檻。</p>
+            </div>
+          </div>
+          <div class="solution-item">
+            <div class="bubble">B</div>
+            <div>
+              <h3>讓港務、環保與漁業管理對接</h3>
+              <p>清楚分工、共享資料，避免問題拖延太久才被處理。</p>
+            </div>
+          </div>
+          <div class="solution-item">
+            <div class="bubble">C</div>
+            <div>
+              <h3>參考國內外綠色拆船或回收案例</h3>
+              <p>把拆解過程變得更安全、更透明，也讓環境成本可控。</p>
+            </div>
+          </div>
+          <div class="solution-item">
+            <div class="bubble">D</div>
+            <div>
+              <h3>保存部分船舶記憶，轉化為公共教育素材</h3>
+              <p>不是每艘船都要被保留，但可以留下影像、口述歷史與港口記憶。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="media-placeholder">
+          <div>
+            <strong>暫時性解方圖表／案例區塊</strong>
+            <span>請替換為：政策流程圖、國外案例比較、港區再利用示意圖、時間軸結尾動畫。</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+<!-- 笨方法區隔用 -->
+<section>
+    <div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+</section>
+
+
+
+
+  <section id="ending">
+    <div class="container">
+      <div class="section-head">
+        <div class="section-kicker">收尾</div>
+        <h2>這些船曾經航向世界，如今停留在港灣深處</h2>
+        <p class="section-desc">結尾要有餘韻，但也要有收束。用一句有力的總結，把「產業記憶」與「現實治理」重新連起來。</p>
+      </div>
+
+      <div class="end-card">
+        <div class="overlay">
+          <h3>等待拆解的不只是鋼鐵，還有一段海洋時代的尾聲</h3>
+          <p>高雄港裡的老舊遠洋漁船，曾經承載台灣的外銷榮景，也映照產業轉型後留下的治理空白。它們最後的去向，將會決定港灣如何與自己的過去和解。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
     </section>
+
+
+
+
+
 
 
 
