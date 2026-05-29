@@ -1,4 +1,5 @@
 body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang TC", "Hiragino Sans GB", "Microsoft JhengHei", sans-serif;
     font-size: 25px; /* 全域字體大小 */
     margin: 0; /* 移除邊距 */
     background-color: transparent; /* 背景透明，顯示底層背景圖 */
@@ -111,7 +112,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: 2;
+    z-index: 10;
     will-change: transform;
 }
 
@@ -149,10 +150,10 @@ body {
 
 /* 針對小標題給予微弱的背景色區隔 */
 #text-main, #text-monitor {
-    background: rgba(0, 0, 0, 0.2); 
+    background: rgba(0, 0, 0, 0.5); 
     padding: 10px 20px !important; 
-    border-radius: 4px;
-    backdrop-filter: blur(2px); /* 輕微模糊背景增加質感 */
+    border-radius: 12px;
+    backdrop-filter: blur(10px); /* 輕微模糊背景增加質感 */
 }
 
 /* 優化圖片網格的進場感覺 */
@@ -164,10 +165,13 @@ body {
     box-shadow: 0 20px 40px rgba(0,0,0,0.6);
     opacity: 0; 
     transition: filter 0.5s ease; /* 增加滑鼠經過時的濾鏡變化 (可選) */
+
+    
 }
 
 .image-grid-container img:hover {
     filter: brightness(1.2);
+    /* background-color: #000; */
 }
 
 
@@ -197,12 +201,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* background-color: #000; */
 }
 
 .reveal-p {
     /* background-color: red; */
     font-size: 2rem;
-    width: 70%;
+    width: 100%;
     text-align: center;
     opacity: 0;
     filter: blur(20px); /* 初始模糊 */
@@ -478,10 +483,10 @@ body {
 
 /* 自定義每個小視窗的位置（可根據視覺需求調整） */
 .v1 { top: 10%; left: 10%; }
-.v2 { top: 15%; right: 12%; }
-.v3 { bottom: 20%; left: 15%; }
-.v4 { bottom: 15%; right: 10%; }
-.v5 { top: 45%; left: 50%; transform: translate(-50%, -50%) scale(0.8); }
+.v2 { top: 18%; right: 8%; }
+.v3 { bottom: 25%; left: 30%; }
+.v4 { bottom: 18%; right: 17%; }
+.v5 { top: 20%; left: 50%; transform: translate(-50%, -50%) scale(0.8); }
 
 
 
@@ -527,10 +532,10 @@ body {
 /* style.css 新增內容 */
 .music-control {
     position: fixed;
-    top: 20px;
+    top: 55px;
     right: 20px;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     background: rgba(0, 0, 0, 0.6);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
@@ -589,3 +594,297 @@ body {
     .timeline-container::before, .timeline-line-progress { left: 20px; transform: none; }
     .timeline-dot { left: 12px !important; }
 }
+
+
+
+    @media (prefers-reduced-motion: reduce) {
+      .glow-box,
+      .glow-box::before,
+      .glow-box::after,
+      .glow-box > .edge-light {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid, .grid-2, .three-col, .quote-grid, .solutions, .stats {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        min-height: auto;
+        padding-top: 120px;
+      }
+      .nav { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      section { padding: 68px 0; }
+      .container { width: min(var(--max), calc(100% - 22px)); }
+      .hero-copy, .section-desc { font-size: 16px; }
+      .meta-card .value { font-size: 16px; }
+    }
+
+
+
+/* 260528 新增兩張圖片平行分布 */
+.image-container {
+    display: flex;         /* 啟用 Flexbox，預設會讓子元素橫向排列 */
+    justify-content: center ; /* 圖片靠左對齊 (可改成 center 置中或 space-between 分散，(原本是flex-start)) */
+    gap: 15px;            /* 兩張圖片之間的間距，可自行調整 */
+}
+
+.image-container img {
+    width: 48%;           /* 確保兩張圖片加起來不超過 100%，避免擠下去 */
+    height: auto;         /* 保持圖片比例 */
+}
+
+
+
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+
+
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+
+    .card.pad { padding: 22px; }
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .card p { margin: 0 0 12px; color: #d5e2e8; }
+    .muted { color: var(--muted) !important; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .mini-card {
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      background: rgba(5, 5, 5, 0.3);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .mini-card .icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      margin-bottom: 14px;
+      background: rgba(125,211,252,.12);
+      border: 1px solid rgba(125,211,252,.16);
+    }
+    .mini-card h3 { font-size: 20px; margin-bottom: 8px; }
+    .mini-card p { font-size: 16px; color: var(--muted); margin: 0; }
+
+
+
+
+
+
+
+
+        blockquote {
+      margin: 0;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      position: relative;
+      min-height: 100%;
+    }
+    blockquote::before {
+      content: "“";
+      position: absolute;
+      top: 8px;
+      left: 14px;
+      font-size: 56px;
+      line-height: 1;
+      color: rgba(125,211,252,.18);
+      font-family: Georgia, serif;
+    }
+    blockquote p {
+      margin: 24px 0 14px;
+      font-size: 16px;
+      color: #e5eef3;
+    }
+    blockquote footer {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+
+
+
+
+
+
+
+     .section-kicker {
+      color: var(--accent);
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+    }
+
+
+    h1 {
+      margin: 0;
+      font-size: clamp(42px, 7vw, 84px);
+      line-height: 1.02;
+      letter-spacing: .02em;
+      text-wrap: balance;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.15;
+      text-wrap: balance;
+    }
+
+    .section-desc {
+      max-width: 80ch;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+
+    .solution-item h3 { margin: 0 0 6px; font-size: 18px; }
+    .solution-item p { margin: 0; color: var(--muted); }
+
+
+
+
+    .media-placeholder {
+      min-height: 300px;
+      border-radius: var(--radius-xl);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 10px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03)),
+        repeating-linear-gradient(45deg, rgba(255,255,255,.05) 0 12px, rgba(255,255,255,.02) 12px 24px),
+        linear-gradient(135deg, rgba(13,36,48,.95), rgba(4,12,18,.95));
+      border: 1px dashed rgba(255,255,255,.18);
+      color: #d7e6ec;
+    }
+
+    .media-placeholder strong {
+      display: block;
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .media-placeholder span {
+      color: var(--muted);
+      max-width: 36ch;
+      display: block;
+    }
+    .caption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+
+
+        .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .stat {
+      padding: 16px;
+      border-radius: var(--radius-md);
+      background: var(--panel-2);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .stat .num {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat .txt { color: var(--muted); font-size: 14px; }
+
+
+
+
+
+
+
+
+
+
+
+    .end-card {
+      position: relative;
+      min-height: 420px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(180deg, rgba(2,10,16,.18), rgba(2,10,16,.92)),
+        url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+      display: grid;
+      align-items: end;
+      padding: 28px;
+    }
+    .end-card .overlay {
+      max-width: 56ch;
+      background: rgba(3,9,14,.58);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 22px;
+      padding: 22px;
+      backdrop-filter: blur(12px);
+    }
+    .end-card h3 { margin: 0 0 10px; font-size: 28px; }
+    .end-card p { margin: 0; color: #e6f0f5; }
+
+
+
+
+
+
+
+
+
